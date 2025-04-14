@@ -42,7 +42,7 @@ async function decrypt(
       encryptedBuffer
     );
 
-    // Convert decrypted ArrayBuffer to string and parse JSON
+    // Convert decrypted ArrayBuffer to string
     const decryptedText = new TextDecoder().decode(decryptedBuffer);
     return decryptedText;
   } catch (error: unknown) {

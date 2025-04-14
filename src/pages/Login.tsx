@@ -13,6 +13,7 @@ import Loader from "../components/ui/Loader";
 type ValidationErrors = {
 	email?: string;
 	password?: string;
+	serverError?: string;
 };
 
 export default function Login() {
@@ -58,8 +59,9 @@ export default function Login() {
 
 				// Redirect to the profile page
 				navigate("/profile");
-			} catch (error) {
-				console.log(error);
+			} catch (error: any) {
+				console.log(error?.response?.data);
+				setErrors({ serverError: error?.response?.data?.message ?? "Something went wrong" });
 			}
 		});
 	};
@@ -94,6 +96,7 @@ export default function Login() {
                   Forgot password?
                 </Link>
               </div>
+							{errors.serverError && <ErrorMsg message={errors.serverError} />}
             </div>
           </CardContent>
           <CardFooter className="flex flex-col space-y-4">
